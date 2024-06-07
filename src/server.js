@@ -7,7 +7,14 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get("/", (request, response) => {
+app.get("/", (request, response, next) => {
+
+	if (!errors.isEmpty()){
+		next(new Error())
+	}
+
+	return next(new Error("Error on purpose from root route"))
+
 	response.json({
 		message:"Hello world!"
 	});
