@@ -16,10 +16,24 @@ router.post("/", (request, response, next) => {
 	response.json({
 		message:"Received data!",
 		data: request.body
-	})
+	});
 
 });
 
+router.get("/headercheck", (request, response, next) => {
+
+	let authData = request.headers.authorization;
+
+	if (!authData) {
+		next(new Error("No auth data provided!"));
+	}
+
+	response.json({
+		message:"Auth data received!",
+		data: authData
+	})
+
+})
 
 
 module.exports = router;
