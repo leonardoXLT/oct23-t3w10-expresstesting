@@ -24,8 +24,10 @@ router.get("/headercheck", (request, response, next) => {
 
 	let authData = request.headers.authorization;
 
+
+
 	if (!authData) {
-		next(new Error("No auth data provided!"));
+		return next(new Error("No auth data provided!"));
 	}
 
 	response.json({
